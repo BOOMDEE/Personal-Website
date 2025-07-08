@@ -5,250 +5,259 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BOOMDEE Website</title>
   <style>
+    /*—— 主题色与变量 ——*/
     :root {
-      --color-bg: linear-gradient(135deg, #2196F3, #4CAF50, #9C27B0);
-      --color-text: #1c1b1f;
-      --color-btn: #000;
-      --color-btn-text: #fff;
-      --color-muted: #666;
-      --glass-bg: rgba(255, 255, 255, 0.08);
-    }
-
-    body.dark {
-      --color-bg: linear-gradient(135deg, #121212, #2f2f2f, #1d1d1d);
-      --color-text: #f2f2f2;
-      --color-btn: #fff;
-      --color-btn-text: #000;
-      --color-muted: #aaa;
-      --glass-bg: rgba(0, 0, 0, 0.3);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      --gradient-bg: linear-gradient(135deg, #2196F3, #4CAF50, #9C27B0);
+      --dark-gradient-bg: linear-gradient(135deg, #0D47A1, #1B5E20, #4A148C);
+      --surface-light: rgba(255,255,255,0.12);
+      --surface-dark: rgba(0,0,0,0.4);
+      --text-light: #1C1B1F;
+      --text-dark: #ECECEC;
+      --ripple-color: rgba(255,255,255,0.3);
+      --ripple-color-dark: rgba(0,0,0,0.3);
+      --easing: cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
-      font-family: "Segoe UI", "Noto Sans", sans-serif;
-      color: var(--color-text);
-      background: var(--color-bg);
+      margin: 0; padding: 0;
+      font-family: "Segoe UI", "Noto Sans SC", sans-serif;
+      color: var(--text-light);
+      background: var(--gradient-bg);
       background-size: 600% 600%;
-      animation: gradientMove 30s ease infinite;
-      transition: background 1s ease;
+      animation: bgShift 30s ease infinite;
+      transition: background 0.8s var(--easing), color 0.5s var(--easing);
+    }
+    body.dark {
+      color: var(--text-dark);
+      background: var(--dark-gradient-bg);
+      animation: none;
     }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes bgShift {
+      0% { background-position:   0% 50%; }
+      50%{ background-position: 100% 50%; }
+      100%{ background-position:  0% 50%; }
     }
 
-    .overlay-bing {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -2;
-      background-size: cover;
-      background-position: center;
-      filter: blur(12px) brightness(0.9);
-      opacity: 0;
-      transition: opacity 1s ease;
+    /*—— 必应背景层 ——*/
+    .overlay {
+      position: fixed; inset: 0; z-index: -1;
+      background-size: cover; background-position: center;
+      filter: blur(12px) brightness(0.8);
+      opacity: 0; transition: opacity 0.8s var(--easing);
+    }
+    body.bing .overlay { opacity: 1; }
+
+    /*—— 顶部 AppBar ——*/
+    .app-bar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1.2rem;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(16px);
+      transition: background 0.5s var(--easing);
+    }
+    body.dark .app-bar {
+      background: rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-size: 1.2rem; font-weight: 600;
+    }
+    .controls button {
+      background: none; border: none;
+      font-size: 1.4rem; margin-left: 0.8rem;
+      cursor: pointer; position: relative;
+      padding: 0.4rem; border-radius: 50%;
+      transition: background 0.3s var(--easing);
+    }
+    .controls button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    body.dark .controls button:hover {
+      background: rgba(0,0,0,0.2);
     }
 
-    .show-bing .overlay-bing {
-      opacity: 1;
+    /*—— 主体布局 ——*/
+    main {
+      max-width: 720px; margin: 2rem auto;
+      padding: 0 1rem;
     }
-
-    .container {
+    .card {
       position: relative;
-      max-width: 720px;
-      margin: 5rem auto;
+      background: var(--surface-light);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      margin-bottom: 2rem;
       padding: 2rem;
-      background: var(--glass-bg);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      border-radius: 1.5rem;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      animation: fadeIn 1.2s ease-out forwards;
+      opacity: 0; animation: fadeIn 1s forwards;
     }
-
+    body.dark .card {
+      background: var(--surface-dark);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
     @keyframes fadeIn {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0);  opacity: 1; }
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
+      display: block; margin: 0 auto 1.2rem;
+      width: 120px; height: 120px;
       border-radius: 50%;
-      margin-bottom: 1.5rem;
       border: 3px solid rgba(255,255,255,0.7);
       box-shadow: 0 4px 18px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s var(--easing);
+    }
+    .avatar:hover { transform: scale(1.05); }
+
+    h2 { text-align: center; margin-bottom: 0.6rem; }
+    .desc {
+      text-align: center; color: inherit;
+      line-height: 1.6; margin-bottom: 1.8rem;
+      font-size: 1.05rem;
     }
 
-    .avatar:hover {
-      transform: scale(1.05);
+    /*—— 按钮 & 水波纹 (Ripple) ——*/
+    .button, .controls button {
+      overflow: hidden;
     }
-
-    h1 {
-      font-size: 2.2em;
-      margin-bottom: 0.3em;
-    }
-
-    p.description {
-      font-size: 1.1em;
-      color: var(--color-muted);
-      margin-bottom: 2em;
-    }
-
     .button {
       display: inline-block;
-      background-color: var(--color-btn);
-      color: var(--color-btn-text);
-      padding: 12px 24px;
-      border-radius: 9999px;
-      font-size: 1rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.3s ease;
+      background: #000; color: #fff;
+      padding: 0.6rem 1.6rem; font-size: 1rem;
+      text-decoration: none; border-radius: 24px;
+      font-weight: 500; position: relative;
+      transition: background 0.3s var(--easing), transform 0.2s var(--easing);
+    }
+    .button:hover { transform: scale(1.04); }
+    .button:active { transform: scale(0.96); }
+
+    .ripple {
+      position: relative; overflow: hidden;
+    }
+    .ripple::after {
+      content: ""; position: absolute;
+      width: 100px; height: 100px;
+      background: var(--ripple-color);
+      border-radius: 50%; opacity: 0;
+      transform: scale(0);
+      pointer-events: none;
+      transition: transform 0.6s var(--easing), opacity 0.6s var(--easing);
+    }
+    body.dark .ripple::after {
+      background: var(--ripple-color-dark);
     }
 
-    .button:hover {
-      transform: scale(1.06);
-      background-color: #444;
-      color: #fff;
-    }
-
-    .toggles {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      display: flex;
-      gap: 1rem;
-      z-index: 10;
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 48px;
-      height: 24px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0;
-      right: 0; bottom: 0;
-      background-color: #ccc;
-      border-radius: 34px;
-      transition: .4s;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      border-radius: 50%;
-      transition: .4s;
-    }
-
-    .switch input:checked + .slider {
-      background-color: #2196F3;
-    }
-
-    .switch input:checked + .slider:before {
-      transform: translateX(24px);
-    }
-
-    footer {
+    /*—— 联系方式卡片 ——*/
+    .contact .actions {
       text-align: center;
-      font-size: 0.9em;
-      color: var(--color-muted);
-      margin-top: 3rem;
-      line-height: 1.6;
     }
 
+    /*—— 页脚 ——*/
+    footer {
+      text-align: center; padding: 2rem 1rem;
+      color: var(--text-light); font-size: 0.9rem;
+    }
+    body.dark footer { color: var(--text-dark); }
     .slogan {
-      font-style: italic;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-top: 0.5rem;
-      animation: fadeIn 1.5s ease 0.5s forwards;
+      margin-top: 0.5rem; font-style: italic;
+      font-weight: 600; opacity: 0;
+      animation: fadeIn 1s 0.5s forwards;
     }
   </style>
 </head>
 <body>
+  <!-- 必应背景 -->
+  <div class="overlay" id="overlay"></div>
 
-  <!-- 必应背景图 -->
-  <div class="overlay-bing" id="bing"></div>
+  <!-- AppBar + 切换按钮 -->
+  <header class="app-bar">
+    <div class="logo">BOOMDEE</div>
+    <div class="controls">
+      <button id="bgToggle" class="ripple" aria-label="切换背景">🌈</button>
+      <button id="themeToggle" class="ripple" aria-label="切换主题">☀️</button>
+    </div>
+  </header>
 
-  <!-- 切换开关 -->
-  <div class="toggles">
-    <label class="switch">
-      <input type="checkbox" id="themeToggle" />
-      <span class="slider"></span>
-    </label>
-    <label class="switch">
-      <input type="checkbox" id="bgToggle" />
-      <span class="slider"></span>
-    </label>
-  </div>
+  <!-- 主内容 -->
+  <main>
+    <section class="card">
+      <img class="avatar" src="https://avatars.githubusercontent.com/u/102970970?s=400" alt="尹嘉骐" />
+      <h2>尹嘉骐</h2>
+      <p class="desc">技能：C++，Python<br>欢迎来到我的 BOOMDEE Website。</p>
+      <div class="actions" style="text-align:center;">
+        <a href="https://github.com/BOOMDEE" class="button ripple" target="_blank">查看我的作品</a>
+      </div>
+    </section>
 
-  <!-- 内容主体 -->
-  <div class="container">
-    <img class="avatar" src="https://avatars.githubusercontent.com/u/102970970?s=400" alt="尹嘉骐 Avatar" />
-    <h1>尹嘉骐</h1>
-    <p class="description">技能：C++, Python<br>欢迎来到我的 BOOMDEE Website。</p>
-    <a class="button" href="https://github.com/BOOMDEE" target="_blank">查看我的作品</a>
-  </div>
+    <section class="card contact">
+      <h2>联系方式</h2>
+      <div class="actions">
+        <a href="mailto:alright.rook.ywzt@mask.me" class="button ripple">邮箱联系</a>
+      </div>
+    </section>
+  </main>
 
-  <!-- 页脚 -->
+  <!-- 页脚 & slogan -->
   <footer>
-    Copyright © 2025 尹嘉骐. All rights reserved.
+    © 2025 尹嘉骐. All rights reserved.
     <div class="slogan">Do Anything & Create Anything.</div>
   </footer>
 
-  <!-- 脚本逻辑 -->
   <script>
+    // 背景与主题切换
     const body = document.body;
-    const bgToggle = document.getElementById("bgToggle");
-    const themeToggle = document.getElementById("themeToggle");
-    const bing = document.getElementById("bing");
+    const bgToggle = document.getElementById('bgToggle');
+    const themeToggle = document.getElementById('themeToggle');
+    const overlay = document.getElementById('overlay');
 
-    // 默认动态背景（不显示 Bing 图）
-    bgToggle.addEventListener("change", () => {
-      document.body.classList.toggle("show-bing");
+    // 初始：加载必应背景 URL
+    fetch('https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN')
+      .then(r => r.json())
+      .then(j => { overlay.style.backgroundImage = `url(${j.url})`; });
+
+    // 切换背景：gradient ↔ bing
+    bgToggle.addEventListener('click', () => {
+      body.classList.toggle('bing');
+      bgToggle.textContent = body.classList.contains('bing') ? '🖼️' : '🌈';
     });
 
-    // 暗色模式切换
-    themeToggle.addEventListener("change", () => {
-      body.classList.toggle("dark");
+    // 切换主题：light ↔ dark
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      themeToggle.textContent = body.classList.contains('dark') ? '🌙' : '☀️';
     });
 
-    // 获取必应背景图片
-    fetch("https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN")
-      .then(res => res.json())
-      .then(data => {
-        if (data.url) {
-          bing.style.backgroundImage = `url(${data.url})`;
-        }
+    // 全局水波纹效果
+    document.querySelectorAll('.ripple').forEach(el => {
+      el.addEventListener('click', e => {
+        const r = e.currentTarget;
+        const rect = r.getBoundingClientRect();
+        const circle = r.querySelector('::after');
+        let ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+        ripple.style.left = (e.clientX - rect.left - rect.width) + 'px';
+        ripple.style.top = (e.clientY - rect.top - rect.height) + 'px';
+        ripple.style.background = getComputedStyle(r, null).getPropertyValue('--ripple-color');
+        if (body.classList.contains('dark'))
+          ripple.style.background = getComputedStyle(r, null).getPropertyValue('--ripple-color-dark');
+        ripple.style.borderRadius = '50%';
+        ripple.style.opacity = '0.6';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.transition = 'transform 0.6s var(--easing), opacity 0.6s var(--easing)';
+        r.appendChild(ripple);
+        requestAnimationFrame(() => {
+          ripple.style.transform = 'scale(2.5)';
+          ripple.style.opacity = '0';
+        });
+        setTimeout(() => { ripple.remove(); }, 600);
       });
+    });
   </script>
-
 </body>
 </html>
+```
