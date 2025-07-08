@@ -1,246 +1,254 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>尹嘉骐 个人官网</title>
-<style>
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    font-family: "Noto Sans SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(45deg, #2196F3, #4CAF50, #9E9E9E, #9C27B0);
-    background-size: 800% 800%;
-    animation: backgroundShift 30s ease infinite;
-    color: #000;
-    overflow-x: hidden;
-  }
-  @keyframes backgroundShift {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
-  }
-  body::before {
-    content: "";
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.12), transparent 70%);
-    filter: blur(150px);
-    animation: rotateBg 60s linear infinite;
-    z-index: -1;
-  }
-  .container {
-    max-width: 700px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background: rgba(255 255 255 / 0.15);
-    backdrop-filter: blur(15px);
-    border-radius: 1.25rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  }
-  .avatar {
-    display: block;
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 1.5rem auto;
-    border-radius: 50%;
-    border: 4px solid rgba(255 255 255 / 0.7);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-  .avatar:hover { transform: scale(1.1); }
-  h1, h2 {
-    font-weight: 700;
-    text-align: left;
-    margin-bottom: 0.5rem;
-  }
-  p.description {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-bottom: 2rem;
-  }
-  section {
-    margin-bottom: 2rem;
-  }
-  .btn {
-    display: inline-block;
-    background-color: #000;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-    cursor: pointer;
-  }
-  .btn:hover {
-    background-color: #fff;
-    color: #000;
-  }
-  .btn:active {
-    transform: scale(0.95);
-  }
-  #chat-container {
-    display: none;
-    margin-top: 1rem;
-    background: rgba(255 255 255 / 0.15);
-    backdrop-filter: blur(15px);
-    border-radius: 1rem;
-    padding: 1rem;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  .message {
-    margin: 0.5rem 0;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    max-width: 80%;
-    line-height: 1.4;
-    white-space: pre-wrap;
-  }
-  .user { background: #000; color: #fff; align-self: flex-end; }
-  .bot { background: #eee; color: #000; align-self: flex-start; }
-  #chat-input-area {
-    display: flex;
-    margin-top: 0.5rem;
-  }
-  #chat-input {
-    flex: 1;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 0.5rem 0 0 0.5rem;
-    outline: none;
-  }
-  #chat-send {
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 0 1rem;
-    border-radius: 0 0.5rem 0.5rem 0;
-    cursor: pointer;
-  }
-  select {
-    margin-bottom: 0.5rem;
-    padding: 0.3rem;
-    border-radius: 0.5rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOOMDEE Website</title>
+  <style>
+    :root {
+      --color-bg: linear-gradient(135deg, #2196F3, #4CAF50, #9C27B0);
+      --color-text: #1c1b1f;
+      --color-btn: #000;
+      --color-btn-text: #fff;
+      --color-muted: #666;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+    }
+
+    body.dark {
+      --color-bg: linear-gradient(135deg, #121212, #2f2f2f, #1d1d1d);
+      --color-text: #f2f2f2;
+      --color-btn: #fff;
+      --color-btn-text: #000;
+      --color-muted: #aaa;
+      --glass-bg: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", "Noto Sans", sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      background-size: 600% 600%;
+      animation: gradientMove 30s ease infinite;
+      transition: background 1s ease;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .overlay-bing {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background-size: cover;
+      background-position: center;
+      filter: blur(12px) brightness(0.9);
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .show-bing .overlay-bing {
+      opacity: 1;
+    }
+
+    .container {
+      position: relative;
+      max-width: 720px;
+      margin: 5rem auto;
+      padding: 2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      border: 3px solid rgba(255,255,255,0.7);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 0.3em;
+    }
+
+    p.description {
+      font-size: 1.1em;
+      color: var(--color-muted);
+      margin-bottom: 2em;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: var(--color-btn);
+      color: var(--color-btn-text);
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.06);
+      background-color: #444;
+      color: #fff;
+    }
+
+    .toggles {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 1rem;
+      z-index: 10;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: .4s;
+    }
+
+    .switch input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: var(--color-muted);
+      margin-top: 3rem;
+      line-height: 1.6;
+    }
+
+    .slogan {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-top: 0.5rem;
+      animation: fadeIn 1.5s ease 0.5s forwards;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <img src='https://avatars.githubusercontent.com/u/102970970?s=400&u=f12442b1449a18d6e8dfb1786135dbccf083f418&v=4' alt="头像" class="avatar" />
-    <section>
-      <h1>尹嘉骐</h1>
-      <p class="description">
-        技能：C++, Python<br />
-        成就：班级图书管理系统（区一等奖）；无人机编程比赛（区三等奖）
-      </p>
-    </section>
-    <section>
-      <h2>作品展示</h2>
-      <a href="https://github.com/BOOMDEE" target="_blank" class="btn">GitHub 仓库</a>
-    </section>
-    <section>
-      <h2>联系方式</h2>
-      <div>
-        <span>邮箱：alright.rook.ywzt@mask.me</span><br />
-        <a href="https://github.com/BOOMDEE" target="_blank" class="btn">GitHub</a>
-      </div>
-    </section>
-    <section>
-      <h2>工具箱</h2>
-      <div>
-        <button class="btn" id="mango-btn">Mango Intelligence</button>
-        <a href="https://www.airportal.cn" target="_blank" class="btn">文件传输</a>
-        <a href="https://ol.woobx.cn" target="_blank" class="btn">更多工具</a>
-      </div>
-    </section>
-    <div id="chat-container">
-      <select id="model-select">
-        <option value="deepseek-ai/deepseek-r1">DeepSeek-R1</option>
-        <option value="deepseek-ai/deepseek-v3">DeepSeek-V3</option>
-        <option value="qwen/qwen3-32b">Qwen3-32B</option>
-      </select>
-      <div id="chat-messages"></div>
-      <div id="chat-input-area">
-        <input id="chat-input" type="text" placeholder="输入消息...">
-        <button id="chat-send">发送</button>
-      </div>
-    </div>
+
+  <!-- 必应背景图 -->
+  <div class="overlay-bing" id="bing"></div>
+
+  <!-- 切换开关 -->
+  <div class="toggles">
+    <label class="switch">
+      <input type="checkbox" id="themeToggle" />
+      <span class="slider"></span>
+    </label>
+    <label class="switch">
+      <input type="checkbox" id="bgToggle" />
+      <span class="slider"></span>
+    </label>
   </div>
 
-<script>
-const mangoBtn = document.getElementById('mango-btn');
-const chatContainer = document.getElementById('chat-container');
-const chatMessages = document.getElementById('chat-messages');
-const chatInput = document.getElementById('chat-input');
-const chatSend = document.getElementById('chat-send');
-const modelSelect = document.getElementById('model-select');
-let history = [];
+  <!-- 内容主体 -->
+  <div class="container">
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/102970970?s=400" alt="尹嘉骐 Avatar" />
+    <h1>尹嘉骐</h1>
+    <p class="description">技能：C++, Python<br>欢迎来到我的 BOOMDEE Website。</p>
+    <a class="button" href="https://github.com/BOOMDEE" target="_blank">查看我的作品</a>
+  </div>
 
-mangoBtn.addEventListener('click', () => {
-  chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
-});
+  <!-- 页脚 -->
+  <footer>
+    Copyright © 2025 尹嘉骐. All rights reserved.
+    <div class="slogan">Do Anything & Create Anything.</div>
+  </footer>
 
-function addMessage(text, sender) {
-  const msg = document.createElement('div');
-  msg.classList.add('message', sender);
-  msg.innerHTML = text;
-  chatMessages.appendChild(msg);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+  <!-- 脚本逻辑 -->
+  <script>
+    const body = document.body;
+    const bgToggle = document.getElementById("bgToggle");
+    const themeToggle = document.getElementById("themeToggle");
+    const bing = document.getElementById("bing");
 
-async function sendMessageToAI(userMessage) {
-  const model = modelSelect.value;
-  const body = {
-    model,
-    messages: [...history, { role: 'user', content: userMessage }]
-  };
-
-  try {
-    const response = await fetch('https://api.siliconflow.cn/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer sk-yjdpoqklgivksqbrcifywagtbtpctazrqivlqrwatgkxniov'
-      },
-      body: JSON.stringify(body)
+    // 默认动态背景（不显示 Bing 图）
+    bgToggle.addEventListener("change", () => {
+      document.body.classList.toggle("show-bing");
     });
-    const data = await response.json();
-    if (data && data.choices && data.choices.length > 0) {
-      const reply = data.choices[0].message.content;
-      history.push({ role: 'assistant', content: reply });
-      addMessage(reply, 'bot');
-    } else {
-      addMessage('抱歉，未收到有效回复。', 'bot');
-    }
-  } catch (e) {
-    addMessage('调用API时出错：' + e.message, 'bot');
-  }
-}
 
-async function sendMessage() {
-  const userText = chatInput.value.trim();
-  if (!userText) return;
-  addMessage(userText, 'user');
-  history.push({ role: 'user', content: userText });
-  chatInput.value = '';
-  await sendMessageToAI(userText);
-}
+    // 暗色模式切换
+    themeToggle.addEventListener("change", () => {
+      body.classList.toggle("dark");
+    });
 
-chatSend.addEventListener('click', sendMessage);
-chatInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') sendMessage();
-});
+    // 获取必应背景图片
+    fetch("https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN")
+      .then(res => res.json())
+      .then(data => {
+        if (data.url) {
+          bing.style.backgroundImage = `url(${data.url})`;
+        }
+      });
+  </script>
 
-addMessage('欢迎来到尹嘉骐的个人网站聊天区！点击 Mango Intelligence 开始聊天~', 'bot');
-</script>
 </body>
 </html>
