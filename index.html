@@ -19,7 +19,8 @@
     }
 
     body {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: "Segoe UI", "Noto Sans SC", sans-serif;
       color: var(--text-light);
       background: var(--gradient-bg);
@@ -34,24 +35,33 @@
     }
 
     @keyframes bgShift {
-      0% { background-position:   0% 50%; }
-      50%{ background-position: 100% 50%; }
-      100%{ background-position:  0% 50%; }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /*—— 必应背景层 ——*/
     .overlay {
-      position: fixed; inset: 0; z-index: -1;
-      background-size: cover; background-position: center;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
       filter: blur(12px) brightness(0.8);
-      opacity: 0; transition: opacity 0.8s var(--easing);
+      opacity: 0;
+      transition: opacity 0.8s var(--easing);
     }
-    body.bing .overlay { opacity: 1; }
+    body.bing .overlay {
+      opacity: 1;
+    }
 
     /*—— 顶部 AppBar ——*/
     .app-bar {
-      position: sticky; top: 0; z-index: 10;
-      display: flex; align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
       padding: 0.6rem 1.2rem;
       background: rgba(255,255,255,0.3);
@@ -62,13 +72,18 @@
       background: rgba(0,0,0,0.5);
     }
     .logo {
-      font-size: 1.2rem; font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
     .controls button {
-      background: none; border: none;
-      font-size: 1.4rem; margin-left: 0.8rem;
-      cursor: pointer; position: relative;
-      padding: 0.4rem; border-radius: 50%;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      margin-left: 0.8rem;
+      cursor: pointer;
+      position: relative;
+      padding: 0.4rem;
+      border-radius: 50%;
       transition: background 0.3s var(--easing);
     }
     .controls button:hover {
@@ -80,7 +95,8 @@
 
     /*—— 主体布局 ——*/
     main {
-      max-width: 720px; margin: 2rem auto;
+      max-width: 720px;
+      margin: 2rem auto;
       padding: 0 1rem;
     }
     .card {
@@ -92,57 +108,82 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
       margin-bottom: 2rem;
       padding: 2rem;
-      opacity: 0; animation: fadeIn 1s forwards;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
     }
     body.dark .card {
       background: var(--surface-dark);
       box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     }
     @keyframes fadeIn {
-      from { transform: translateY(20px); opacity: 0; }
-      to   { transform: translateY(0);  opacity: 1; }
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .avatar {
-      display: block; margin: 0 auto 1.2rem;
-      width: 120px; height: 120px;
+      display: block;
+      margin: 0 auto 1.2rem;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       border: 3px solid rgba(255,255,255,0.7);
       box-shadow: 0 4px 18px rgba(0,0,0,0.3);
       transition: transform 0.3s var(--easing);
     }
-    .avatar:hover { transform: scale(1.05); }
+    .avatar:hover {
+      transform: scale(1.05);
+    }
 
-    h2 { text-align: center; margin-bottom: 0.6rem; }
+    h2 {
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
     .desc {
-      text-align: center; color: inherit;
-      line-height: 1.6; margin-bottom: 1.8rem;
+      text-align: center;
+      color: inherit;
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
       font-size: 1.05rem;
     }
 
     /*—— 按钮 & 水波纹 (Ripple) ——*/
-    .button, .controls button {
+    .button,
+    .controls button {
       overflow: hidden;
     }
     .button {
       display: inline-block;
-      background: #000; color: #fff;
-      padding: 0.6rem 1.6rem; font-size: 1rem;
-      text-decoration: none; border-radius: 24px;
-      font-weight: 500; position: relative;
+      background: #000;
+      color: #fff;
+      padding: 0.6rem 1.6rem;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 24px;
+      font-weight: 500;
+      position: relative;
       transition: background 0.3s var(--easing), transform 0.2s var(--easing);
     }
-    .button:hover { transform: scale(1.04); }
-    .button:active { transform: scale(0.96); }
-
-    .ripple {
-      position: relative; overflow: hidden;
+    .button:hover {
+      transform: scale(1.04);
     }
+    .button:active {
+      transform: scale(0.96);
+    }
+
     .ripple::after {
-      content: ""; position: absolute;
-      width: 100px; height: 100px;
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
       background: var(--ripple-color);
-      border-radius: 50%; opacity: 0;
+      border-radius: 50%;
+      opacity: 0;
       transform: scale(0);
       pointer-events: none;
       transition: transform 0.6s var(--easing), opacity 0.6s var(--easing);
@@ -158,14 +199,23 @@
 
     /*—— 页脚 ——*/
     footer {
-      text-align: center; padding: 2rem 1rem;
-      color: var(--text-light); font-size: 0.9rem;
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
     }
-    body.dark footer { color: var(--text-dark); }
+    body.dark footer {
+      color: var(--text-dark);
+    }
     .slogan {
-      margin-top: 0.5rem; font-style: italic;
-      font-weight: 600; opacity: 0;
+      margin-top: 0.5rem;
+      font-style: italic;
+      font-weight: 600;
+      opacity: 0;
       animation: fadeIn 1s 0.5s forwards;
+    }
+    .footer-buttons a {
+      margin: 0 0.5rem;
     }
   </style>
 </head>
@@ -187,7 +237,7 @@
     <section class="card">
       <img class="avatar" src="https://avatars.githubusercontent.com/u/102970970?s=400" alt="尹嘉骐" />
       <h2>尹嘉骐</h2>
-      <p class="desc">技能：C++，Python<br>欢迎来到我的 BOOMDEE Website。</p>
+      <p class="desc">技能：C++，Python<br />欢迎来到我的 BOOMDEE Website。</p>
       <div class="actions" style="text-align:center;">
         <a href="https://github.com/BOOMDEE" class="button ripple" target="_blank">查看我的作品</a>
       </div>
@@ -205,59 +255,68 @@
   <footer>
     © 2025 尹嘉骐. All rights reserved.
     <div class="slogan">Do Anything & Create Anything.</div>
+
+    <!-- 新增赞助和政策按钮 -->
+    <div class="footer-buttons" style="margin-top:1rem;">
+      <a href="https://buy-me-a-coffee.boomdee.dpdns.org" target="_blank" class="button ripple">赞助</a>
+      <a href="https://raw.githubusercontent.com/BOOMDEE/Personal-Website/refs/heads/main/EULA.md" target="_blank" class="button ripple">EULA (Markdown)</a>
+      <a href="https://raw.githubusercontent.com/BOOMDEE/Personal-Website/refs/heads/main/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96.md" target="_blank" class="button ripple">隐私政策 (Markdown)</a>
+    </div>
   </footer>
 
   <script>
     // 背景与主题切换
     const body = document.body;
-    const bgToggle = document.getElementById('bgToggle');
-    const themeToggle = document.getElementById('themeToggle');
-    const overlay = document.getElementById('overlay');
+    const bgToggle = document.getElementById("bgToggle");
+    const themeToggle = document.getElementById("themeToggle");
+    const overlay = document.getElementById("overlay");
 
     // 初始：加载必应背景 URL
-    fetch('https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN')
-      .then(r => r.json())
-      .then(j => { overlay.style.backgroundImage = `url(${j.url})`; });
+    fetch("https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN")
+      .then((r) => r.json())
+      .then((j) => {
+        overlay.style.backgroundImage = `url(${j.url})`;
+      });
 
     // 切换背景：gradient ↔ bing
-    bgToggle.addEventListener('click', () => {
-      body.classList.toggle('bing');
-      bgToggle.textContent = body.classList.contains('bing') ? '🖼️' : '🌈';
+    bgToggle.addEventListener("click", () => {
+      body.classList.toggle("bing");
+      bgToggle.textContent = body.classList.contains("bing") ? "🖼️" : "🌈";
     });
 
     // 切换主题：light ↔ dark
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      themeToggle.textContent = body.classList.contains('dark') ? '🌙' : '☀️';
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      themeToggle.textContent = body.classList.contains("dark") ? "🌙" : "☀️";
     });
 
     // 全局水波纹效果
-    document.querySelectorAll('.ripple').forEach(el => {
-      el.addEventListener('click', e => {
+    document.querySelectorAll(".ripple").forEach((el) => {
+      el.addEventListener("click", (e) => {
         const r = e.currentTarget;
         const rect = r.getBoundingClientRect();
-        const circle = r.querySelector('::after');
-        let ripple = document.createElement('span');
-        ripple.style.position = 'absolute';
-        ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
-        ripple.style.left = (e.clientX - rect.left - rect.width) + 'px';
-        ripple.style.top = (e.clientY - rect.top - rect.height) + 'px';
-        ripple.style.background = getComputedStyle(r, null).getPropertyValue('--ripple-color');
-        if (body.classList.contains('dark'))
-          ripple.style.background = getComputedStyle(r, null).getPropertyValue('--ripple-color-dark');
-        ripple.style.borderRadius = '50%';
-        ripple.style.opacity = '0.6';
-        ripple.style.transform = 'scale(0)';
-        ripple.style.transition = 'transform 0.6s var(--easing), opacity 0.6s var(--easing)';
+        let ripple = document.createElement("span");
+        ripple.style.position = "absolute";
+        ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + "px";
+        ripple.style.left = e.clientX - rect.left - rect.width / 2 + "px";
+        ripple.style.top = e.clientY - rect.top - rect.height / 2 + "px";
+        ripple.style.background = getComputedStyle(r, null).getPropertyValue("--ripple-color");
+        if (body.classList.contains("dark"))
+          ripple.style.background = getComputedStyle(r, null).getPropertyValue("--ripple-color-dark");
+        ripple.style.borderRadius = "50%";
+        ripple.style.opacity = "0.6";
+        ripple.style.transform = "scale(0)";
+        ripple.style.transition = "transform 0.6s var(--easing), opacity 0.6s var(--easing)";
         r.appendChild(ripple);
         requestAnimationFrame(() => {
-          ripple.style.transform = 'scale(2.5)';
-          ripple.style.opacity = '0';
+          ripple.style.transform = "scale(2.5)";
+          ripple.style.opacity = "0";
         });
-        setTimeout(() => { ripple.remove(); }, 600);
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
       });
     });
   </script>
 </body>
 </html>
-```
