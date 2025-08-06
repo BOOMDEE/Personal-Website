@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Buy me a Coffee </title>
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --text: #111;
+      --card-bg: #ffffffcc;
+      --btn-bg: #007bff;
+      --btn-text: white;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --card-bg: #1f1f1fcc;
+      --btn-bg: #4a90e2;
+      --btn-text: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.4s ease;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      text-align: center;
+      width: 280px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card img {
+      width: 160px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 0.6rem;
+      text-decoration: none;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2rem;
+      font-size: 0.9rem;
+    }
+
+    .toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle" onclick="toggleTheme()">切换主题</button>
+
+  <header>
+    <h1>💖 支持 BOOMDEE</h1>
+    <p>如果你喜欢我的项目，欢迎通过以下方式支持我 🙏</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/BOOMDEE/Personal-Website/refs/heads/main/AliPay.svg" alt="支付宝二维码" />
+      <h3>支付宝</h3>
+      <a href="https://raw.githubusercontent.com/BOOMDEE/Personal-Website/refs/heads/main/AliPay.svg" target="_blank">扫码赞助</a>
+    </div>
+    <div class="card">
+      <img src="https://raw.githubusercontent.com/BOOMDEE/Personal-Website/refs/heads/main/WeChatPay.svg" alt="微信支付二维码" />
+      <h3>微信支付</h3>
+      <a href="https://raw.githubusercontent.com/BOOMDEE/Personal-Website/refs/heads/main/WeChatPay.svg" target="_blank">扫码赞助</a>
+    </div>
+    <div class="card">
+      <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal" style="width:120px; margin-bottom:1rem;" />
+      <h3>PayPal</h3>
+      <a href="https://paypal.me/BOOMDEE" target="_blank">点击前往</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 尹嘉骐 | boomdee.dpdns.org
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
