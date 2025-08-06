@@ -1,7 +1,7 @@
 # BOOMDEE Website
 
 ✨ 尹嘉骐 · 个人数字主页  
-一个由纯 HTML + CSS + JavaScript 构建的网页作品，仅一个文件，无依赖，无框架。已托管于 GitHub 并通过 Cloudflare Pages 自动部署。
+一个由纯 HTML + CSS + JavaScript 构建的网页作品，仅一个文件，无依赖，无框架。已托管于 GitHub 并通过 Netflix 自动部署。
 
 ---
 
